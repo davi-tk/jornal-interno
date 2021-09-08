@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tailwind',
-    'main',
+    'main.apps.MainConfig',
 ]
 
 TAILWIND_APP_NAME = 'main'

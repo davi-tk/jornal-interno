@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.expressions import F
 from django.utils import timezone
 
 class User(models.Model):
@@ -12,7 +11,7 @@ class Edicao(models.Model):
 
 class Noticia(models.Model):
     titulo = models.CharField(max_length=50)
-    models.ForeignKey(Edicao, on_delete=models.CASCADE)
+    edicao = models.ForeignKey(Edicao, on_delete=models.CASCADE)
     descricao = models.TextField()
     
     CATEGORIAS_CHOICES =[
@@ -31,6 +30,8 @@ class Noticia(models.Model):
 
 class Comentario(models.Model):
     avaliacao = models.DecimalField(max_digits=1, decimal_places=1)
-    models.ForeignKey(User, on_delete=models.CASCADE)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
     comentario = models.TextField(max_length=300)
-    models.DateField(auto_now=False, auto_now_add=True)
+    data_publicação = models.DateField(auto_now=False, auto_now_add=True)
+    edicao = models.ForeignKey(Edicao, on_delete=models.CASCADE)
+    
